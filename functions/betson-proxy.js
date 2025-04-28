@@ -1,14 +1,15 @@
 const fetch = require('node-fetch');
 
-exports.handler = async (event, context) => {
-  if (event.httpMethod !== "POST") {
+exports.handler = async (event) => {
+  if (event.httpMethod === "OPTIONS") {
     return {
-      statusCode: 405,
-      body: JSON.stringify({ error: "Method not allowed" }),
+      statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
       },
+      body: "OK",
     };
   }
 
