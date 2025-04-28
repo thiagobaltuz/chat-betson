@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
-  const allowedOrigin = "https://680f94b05b0b6d0008e65a1e--chatbetson.netlify.app";
+  const allowedOrigin = "https://680f994fcfdea40addbccb8b--chatbetson.netlify.app";
 
   if (event.httpMethod === "OPTIONS") {
     return {
