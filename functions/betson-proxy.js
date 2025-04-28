@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
-  const allowedOrigin = "https://680f994fcfdea40addbccb8b--chatbetson.netlify.app";
+  const allowedOrigin = "680f9c84cfdea410f9bcce9e--chatbetson.netlify.app";
 
   if (event.httpMethod === "OPTIONS") {
     return {
@@ -18,7 +18,7 @@ exports.handler = async (event) => {
   try {
     const body = JSON.parse(event.body);
 
-    const response = await fetch('https://hook.us2.make.com/SEU-WEBHOOK-AQUI', {
+    const response = await fetch('https://hook.us2.make.com/ekeksc98m9z9ivlq61ssamro6wi8uahf', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
