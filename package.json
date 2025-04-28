@@ -1,8 +1,7 @@
 {
-  "name": "proxy-betson-netlify-cors",
+  "name": "chat-betson-corrected",
   "version": "1.1.0",
-  "description": "Proxy Serverless para BETson com suporte completo a CORS",
-  "main": "functions/betson-proxy.js",
+  "description": "Chat BETson + Proxy corrigido para Netlify",
   "scripts": {
     "start": "netlify dev"
   },
