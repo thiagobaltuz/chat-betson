@@ -1,11 +1,113 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>BETson Proxy Server</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BETson Chat 1.1</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    #chat {
+      background: #222;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      height: 70vh;
+      overflow-y: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .user {
+      text-align: right;
+      margin: 5px;
+      color: #4fc3f7;
+    }
+    .betson {
+      text-align: left;
+      margin: 5px;
+      color: #81c784;
+    }
+    #inputArea {
+      width: 90%;
+      max-width: 400px;
+      display: flex;
+      gap: 5px;
+    }
+    input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px;
+      background: #4caf50;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body style="background: #111; color: #0f0; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh;">
-  <h1>Servidor BETson funcionando! 🔥</h1>
-  <p>Este site é apenas o servidor para proxy de requisições do BETson.</p>
+<body>
+
+<div id="chat"></div>
+<div id="inputArea">
+  <input type="text" id="pergunta" placeholder="Digite sua pergunta ao BETson...">
+  <button id="enviar">Enviar</button>
+</div>
+
+<script>
+const webhookURL = "https://680ef198459282256f690671--chatbetson.netlify.app/.netlify/functions/proxy";
+
+async function sendMessage() {
+  const perguntaInput = document.getElementById('pergunta');
+  const pergunta = perguntaInput.value.trim();
+  if (!pergunta) return;
+
+  // Mostrar mensagem do usuário
+  const chat = document.getElementById('chat');
+  const userMessage = document.createElement('div');
+  userMessage.className = 'user';
+  userMessage.textContent = pergunta;
+  chat.appendChild(userMessage);
+  chat.scrollTop = chat.scrollHeight;
+
+  perguntaInput.value = '';
+
+  try {
+    const response = await fetch(webhookURL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pergunta })
+    });
+
+    const data = await response.json();
+    const resposta = data.resposta || "Desculpe, não consegui entender.";
+
+    const betsonMessage = document.createElement('div');
+    betsonMessage.className = 'betson';
+    betsonMessage.textContent = resposta;
+    chat.appendChild(betsonMessage);
+    chat.scrollTop = chat.scrollHeight;
+
+  } catch (error) {
+    console.error("Erro ao comunicar com BETson:", error);
+  }
+}
+
+document.getElementById('enviar').addEventListener('click', sendMessage);
+</script>
+
 </body>
 </html>
