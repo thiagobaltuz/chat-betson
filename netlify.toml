@@ -1,0 +1,6 @@
+[build]
+  functions = "functions"
+  command = "npm install"
+
+[dev]
+  functionsPort = 9999
