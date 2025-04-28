@@ -1,13 +1,15 @@
 const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
+  const allowedOrigin = "https://680f94b05b0b6d0008e65a1e--chatbetson.netlify.app";
+
   if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": allowedOrigin,
         "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
       },
       body: "OK",
     };
@@ -28,7 +30,7 @@ exports.handler = async (event) => {
       statusCode: 200,
       body: JSON.stringify(data),
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": allowedOrigin,
         "Access-Control-Allow-Headers": "Content-Type",
       },
     };
@@ -38,7 +40,7 @@ exports.handler = async (event) => {
       statusCode: 500,
       body: JSON.stringify({ error: 'Erro ao comunicar com o BETson.' }),
       headers: {
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": allowedOrigin,
         "Access-Control-Allow-Headers": "Content-Type",
       },
     };
