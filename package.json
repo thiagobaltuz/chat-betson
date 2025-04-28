@@ -1,8 +1,11 @@
 {
-  "name": "proxy-betson",
+  "name": "proxy-betson-netlify",
   "version": "1.0.0",
-  "description": "Proxy Serverless do BETson via Netlify",
+  "description": "Serverless Proxy for BETson on Netlify",
   "main": "functions/betson-proxy.js",
+  "scripts": {
+    "start": "netlify dev"
+  },
   "dependencies": {
     "node-fetch": "^2.6.7"
   }

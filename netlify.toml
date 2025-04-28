@@ -3,4 +3,5 @@
   command = "npm install"
 
 [dev]
-  functionsPort = 9999
+  functions = "functions"
+  port = 9999
